@@ -1,0 +1,130 @@
+:root {
+    --bg: #0f0f0f;
+    --text: #fbfbfb;
+    --acc: #bcabae;
+    font-size: 16px;
+}
+
+body {
+    font-family: monospace;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    position: relative;
+}
+
+header {
+    padding: 1rem 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.links img {
+    width: 3rem;
+    height: 3rem;
+    transition: transform 0.1s ease;
+}
+
+.links img:hover {
+    transform: scale(1.1);
+}
+
+main {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+section {
+    margin: 2rem 0;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.hover-link {
+    color: var(--acc);
+    text-decoration: none;
+    transition: transform 0.1s ease, color 0.1s ease;
+    display: inline-block;
+}
+
+.hover-link:hover {
+    color: var(--text);
+    transform: scale(1.1);
+}
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.ticker {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--acc);
+    color: var(--text);
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 10;
+}
+
+.t-cont {
+    display: flex;
+    animation: scroll 600s linear infinite;
+}
+
+.t-cont span {
+    display: inline-block;
+    padding: 0 20rem;
+    font-size: 1.2rem;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.star {
+    position: absolute;
+    background-color: var(--text);
+    border-radius: 50%;
+    opacity: 0;
+    animation: star-blink 2s infinite ease-in-out;
+}
+
+@keyframes star-blink {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}

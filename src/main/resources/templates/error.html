@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${errorCode} + ' | schf.me'">error | schf.me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<header>
+    <h1>schf.me</h1>
+    <nav>
+        <a th:href="@{/}" class="hover-link">../</a>
+    </nav>
+</header>
+<main>
+    <section>
+		<h2 th:inline="text">[[${errorCode}]]</h2>
+		<p th:inline="text">[[${errorMessage}]]</p>
+    </section>
+</main>
+<footer>
+    <p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
+</footer>
+</body>
+</html>
