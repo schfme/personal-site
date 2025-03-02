@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title th:text="${errorCode} + ' | schf.me'">error | schf.me</title>
+    <title>error | [[${domain}]]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
 <header>
-    <h1>schf.me</h1>
+    <h1>error</h1>
     <nav>
         <a th:href="@{/}" class="hover-link">../</a>
     </nav>
@@ -22,5 +22,6 @@
 <footer>
     <p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
 </footer>
+<script th:src="@{/js/vhs.js}"></script>
 </body>
 </html>

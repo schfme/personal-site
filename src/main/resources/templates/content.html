@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>music | schf.me</title>
+    <title>[[${pageTitle}]] | [[${domain}]]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
 <header>
-    <h1>music</h1>
+    <h1 th:text="${pageHeader}"></h1>
     <nav>
         <a th:href="@{/}" class="hover-link">../</a>
     </nav>
@@ -16,14 +16,17 @@
 <main>
     <section>
         <ul>
-            <li><a th:href="@{/music/track1}" target="_blank" class="hover-link">Track 1</a> - Track 1.</li>
-            <li><a th:href="@{/music/track2}" target="_blank" class="hover-link">Track 2</a> - Track 2.</li>
-            <li><a th:href="@{/music/track3}" target="_blank" class="hover-link">Track 3</a> - Track 3.</li>
+            <li th:each="item : ${contents}">
+                <a th:href="@{${baseUrl} + '/' + ${item.link}}" class="hover-link">
+                    <span th:text="${item.date}"></span> - <span th:text="${item.name}"></span>
+                </a>
+            </li>
         </ul>
     </section>
 </main>
 <footer>
     <p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
 </footer>
+<script th:src="@{/js/vhs.js}"></script>
 </body>
 </html>

@@ -1,15 +1,18 @@
 package me.schf.personal.config;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import me.schf.personal.service.HeadlineProvider;
-import me.schf.personal.service.ProjectProvider;
-import me.schf.personal.service.domain.Project;
+import me.schf.personal.controller.content.Content;
+import me.schf.personal.controller.content.ContentProvider;
+import me.schf.personal.controller.content.blog.BlogEntry;
+import me.schf.personal.controller.content.music.Music;
+import me.schf.personal.controller.content.projects.Project;
 
 @Configuration
 public class ContentConfig {
@@ -18,17 +21,32 @@ public class ContentConfig {
 	LocalDate today() {
 		return LocalDate.now();
 	}
-
+	
 	@Bean
-	List<String> tickerItems(HeadlineProvider headlineProvider, LocalDate today,
-			@Value("${headline.years.to.subtract}") int yearsToSubtract) {
-		LocalDate headlineDate = today.minusYears(yearsToSubtract);
-		return headlineProvider.getHeadlinesOn(headlineDate);
+	@ConfigurationProperties("site-properties")
+	SiteProperties siteProperties() {
+		return new SiteProperties();
+		
+	}
+	@Bean
+	List<Project> projectsList(ContentProvider<Project> projectProvider) {
+		List<Project> projectList = projectProvider.getContent();
+		projectList.sort(Comparator.comparing(Content::getDate).reversed());
+		return projectList;
 	}
 
 	@Bean
-	List<Project> projectsList(ProjectProvider projectProvider) {
-		return projectProvider.getProjects();
+	List<Music> musicList(ContentProvider<Music> musicProvider) {
+		List<Music> musicList = musicProvider.getContent();
+		musicList.sort(Comparator.comparing(Content::getDate).reversed());
+		return musicList;	
+	}
+
+	@Bean
+	List<BlogEntry> blogList(ContentProvider<BlogEntry> blogEntryProvider) {
+		List<BlogEntry> blogEntryList = blogEntryProvider.getContent();
+		blogEntryList.sort(Comparator.comparing(Content::getDate).reversed());
+		return blogEntryList;	
 	}
 
 }

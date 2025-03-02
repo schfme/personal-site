@@ -1,4 +1,4 @@
-package me.schf.personal.controller;
+package me.schf.personal.controller.error;
 
 import java.time.LocalDate;
 
