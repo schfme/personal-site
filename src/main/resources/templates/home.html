@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>michael schaefer | [[${domain}]]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<header>
+    <h1 th:text="${domain}"></h1>
+    <div class="links">
+        <a th:href="${instagramLink}" target="_blank">
+            <img th:src="@{/img/ig.svg}" alt="Instagram">
+        </a>
+        <a th:href="${githubLink}" target="_blank">
+            <img th:src="@{/img/gh.svg}" alt="GitHub">
+        </a>
+        <a th:href="'mailto:' + ${emailAddress}">
+            <img th:src="@{/img/em.svg}" alt="Email">
+        </a>
+    </div>
+</header>
+<main>
+    <section>
+        <h2><a th:href="@{/projects}" class="hover-link">/projects</a></h2>
+    </section>
+    <section>
+        <h2><a th:href="@{/music}" class="hover-link">/music</a></h2>
+    </section>
+</main>
+<footer>
+    <p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
+</footer>
+<script th:src="@{/js/vhs.js}"></script>
+</body>
+</html>
