@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 import me.schf.personal.controller.content.Content;
 import me.schf.personal.controller.content.ContentProvider;
-import me.schf.personal.controller.content.blog.BlogEntry;
-import me.schf.personal.controller.content.music.Music;
 import me.schf.personal.controller.content.projects.Project;
 
 @Configuration
@@ -33,20 +31,6 @@ public class ContentConfig {
 		List<Project> projectList = projectProvider.getContent();
 		projectList.sort(Comparator.comparing(Content::getDate).reversed());
 		return projectList;
-	}
-
-	@Bean
-	List<Music> musicList(ContentProvider<Music> musicProvider) {
-		List<Music> musicList = musicProvider.getContent();
-		musicList.sort(Comparator.comparing(Content::getDate).reversed());
-		return musicList;	
-	}
-
-	@Bean
-	List<BlogEntry> blogList(ContentProvider<BlogEntry> blogEntryProvider) {
-		List<BlogEntry> blogEntryList = blogEntryProvider.getContent();
-		blogEntryList.sort(Comparator.comparing(Content::getDate).reversed());
-		return blogEntryList;	
 	}
 
 }

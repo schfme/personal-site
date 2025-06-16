@@ -25,8 +25,8 @@ public class HomeController {
 		model.addAttribute("year", today.getYear());
 		model.addAttribute("instagramLink", siteProperties.getIgLink());
 		model.addAttribute("githubLink", siteProperties.getGitHubLink());
+		model.addAttribute("resumeLink", siteProperties.getResumeLink());
 		model.addAttribute("emailAddress", siteProperties.getEmailAddress());
-		model.addAttribute("domain", siteProperties.getDomainName());
 
 		return "home";
 	}
