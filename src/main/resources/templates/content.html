@@ -13,9 +13,9 @@
         <a th:href="@{/}" class="hover-link">../</a>
     </nav>
 </header>
-<main>
+<main class="content-container">
     <section>
-        <ul>
+        <ul class="content-list">
             <li th:each="item : ${contents}">
                 <a th:href="@{${baseUrl} + '/' + ${item.link}}" class="hover-link">
                     <span th:text="${item.date}"></span> - <span th:text="${item.name}"></span>
