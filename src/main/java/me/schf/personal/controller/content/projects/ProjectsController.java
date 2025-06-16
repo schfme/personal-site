@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import me.schf.personal.config.SiteProperties;
 import me.schf.personal.controller.content.AbstractContentController;
 
 @Controller
@@ -16,8 +15,8 @@ public class ProjectsController extends AbstractContentController<Project> {
 
 	private static final String BASE_URL = "/projects";
 
-	public ProjectsController(LocalDate today, List<Project> projectsList, SiteProperties siteProperties) {
-		super(today, projectsList, siteProperties, BASE_URL);
+	public ProjectsController(LocalDate today, List<Project> projectsList) {
+		super(today, projectsList, BASE_URL);
 	}
 
 	@GetMapping(BASE_URL)

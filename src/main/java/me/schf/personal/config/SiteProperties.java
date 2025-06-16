@@ -4,8 +4,8 @@ public class SiteProperties {
 
 	private String igLink;
 	private String gitHubLink;
+	private String resumeLink;
 	private String emailAddress;
-	private String domainName;
 
 	public String getIgLink() {
 		return igLink;
@@ -23,20 +23,20 @@ public class SiteProperties {
 		this.gitHubLink = gitHubLink;
 	}
 
+	public String getResumeLink() {
+		return resumeLink;
+	}
+
+	public void setResumeLink(String resumeLink) {
+		this.resumeLink = resumeLink;
+	}
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
-	}
-
-	public String getDomainName() {
-		return domainName;
-	}
-
-	public void setDomainName(String domainName) {
-		this.domainName = domainName;
 	}
 
 }
