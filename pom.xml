@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>me.schf</groupId>
 	<artifactId>personal</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.2</version>
 	<name>personal</name>
 	<description>Personal Web Page</description>
 	<url />
@@ -28,7 +28,7 @@
 		<url />
 	</scm>
 	<properties>
-		<java.version>23</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -69,6 +69,32 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-nginx-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}/.platform/nginx/conf.d</outputDirectory>
+							<resources>
+								<resource>
+									<directory>
+										src/main/deploy/.platform/nginx/conf.d</directory>
+									<includes>
+										<include>proxy.conf</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
