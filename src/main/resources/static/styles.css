@@ -2,100 +2,159 @@
    root/global
 ===================== */
 :root {
-    --bg: #0f0f0f;
-    --text: #fbfbfb;
-    --acc: #bcabae;
-    --ann: #abbcb9;
-    font-size: 16px;
+	--bg: #0f0f0f;
+	--text: #fbfbfb;
+	--acc: #bcabae;
+	--ann: #abbcb9;
+	font-size: 16px;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	max-width: 100vw;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: monospace;
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    overflow: hidden;
-    position: relative;
+	font-family: monospace;
+	background: var(--bg);
+	color: var(--text);
+	position: relative;
 }
 
-ul, ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* =====================
+   reset lists
+===================== */
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 /* =====================
    layout
 ===================== */
 header {
-    padding: 1rem 0;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
+	padding: 1rem 0;
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-align: center;
 }
 
 main {
-    text-align: center;
-    margin-top: 2rem;
+	text-align: center;
+	margin-top: 2rem;
 }
 
-section {
-    margin: 2rem 0;
+.content-container {
+	padding: 0 1rem;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
+.content-list li {
+	margin-bottom: 0.25rem;
+}
+
+/* =====================
+   footer
+===================== */
 footer {
-    text-align: center;
-    margin-top: 2rem;
-    padding: 1rem 0;
-    font-size: 0.9rem;
-    background: var(--bg);
-    color: var(--text);
+	text-align: center;
+	margin-top: 2rem;
+	padding: 1rem 0;
+	font-size: 0.9rem;
+	background: var(--bg);
+	color: var(--text);
 }
 
 /* =====================
    links
 ===================== */
 h2 {
-    font-size: 2rem;
-    margin: 1rem 0;
+	font-size: 2rem;
+	margin: 1rem 0;
 }
 
 .hover-link {
-    color: var(--acc);
-    text-decoration: none;
-    transition: transform 0.1s ease, color 0.1s ease;
-    display: inline-block;
+	color: var(--acc);
+	text-decoration: none;
+	transition: transform 0.1s ease, color 0.1s ease;
+	display: inline-block;
+
+	/* Ensure long text wraps */
+	word-break: break-word;
+	white-space: normal;
 }
 
 .hover-link:hover {
-    color: var(--text);
-    transform: scale(1.1);
+	color: var(--text);
+	transform: scale(1.1);
 }
 
 /* =====================
    icons
 ===================== */
 .links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
 }
 
 .links img {
-    width: 3rem;
-    height: 3rem;
-    transition: transform 0.1s ease;
+	width: 3rem;
+	height: 3rem;
+	transition: transform 0.1s ease;
 }
 
 .links img:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 /* =====================
    text styles
 ===================== */
 .announcement {
-    color: var(--ann);
-    font-weight: bold;
-    font-size: 1.2rem;
+	color: var(--ann);
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+/* =====================
+   responsive tweaks
+===================== */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+@media (max-width: 600px) {
+	header {
+		font-size: 1.8rem;
+	}
+
+	.hover-link {
+		font-size: 1rem;
+	}
+
+	.links img {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	.announcement {
+		font-size: 1rem;
+	}
 }
