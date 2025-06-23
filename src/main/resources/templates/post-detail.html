@@ -3,26 +3,23 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>error | schf.me</title>
+	<title>[[${pageTitle}]] | schf.me</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 
 <body>
 	<header>
-		<h1>error</h1>
-		<nav aria-label="Main Navigation">
-			<a th:href="@{/}" class="hover-link" aria-label="Go to homepage">../</a>
+		<h1 th:text="${pageHeader}"></h1>
+		<nav aria-label="Return To All Posts">
+			<a th:href="@{/posts}" class="hover-link" aria-label="Posts">../</a>
 		</nav>
 	</header>
-
-	<main role="main" aria-labelledby="errorCode" aria-describedby="errorMessage">
-		<section>
-			<h2 th:inline="text" id="errorCode">[[${errorCode}]]</h2>
-			<p th:inline="text" id="errorMessage">[[${errorMessage}]]</p>
-		</section>
+	<main>
+		<article class="post-article">
+			<div th:utext="${markdownContent}"></div>
+		</article>
 	</main>
-
 	<footer>
 		<p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
 	</footer>

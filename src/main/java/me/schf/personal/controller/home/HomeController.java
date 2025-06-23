@@ -23,10 +23,11 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("year", today.getYear());
-		model.addAttribute("instagramLink", siteProperties.getIgLink());
-		model.addAttribute("githubLink", siteProperties.getGitHubLink());
-		model.addAttribute("resumeLink", siteProperties.getResumeLink());
-		model.addAttribute("emailAddress", siteProperties.getEmailAddress());
+		model.addAttribute("emailAddress", siteProperties.getExternalLinkConfig().getEmailAddress());
+		model.addAttribute("githubLink", siteProperties.getExternalLinkConfig().getGitHubLink());
+		model.addAttribute("instagramLink", siteProperties.getExternalLinkConfig().getIgLink());
+		model.addAttribute("linkedinLink", siteProperties.getExternalLinkConfig().getLinkedinLink());
+		model.addAttribute("resumeLink", siteProperties.getExternalLinkConfig().getResumeLink());
 
 		return "home";
 	}

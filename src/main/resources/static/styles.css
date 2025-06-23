@@ -57,14 +57,23 @@ main {
 	margin-top: 2rem;
 }
 
-.content-container {
+.post-headline-container {
 	padding: 0 1rem;
 	max-width: 600px;
 	margin: 0 auto;
 }
 
-.content-list li {
+.post-headline-list li {
 	margin-bottom: 0.25rem;
+}
+
+.post-article {
+  text-align: left;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1em;
+  color: var(--text);
+  border: 2px solid var(--acc);
 }
 
 /* =====================
@@ -123,6 +132,11 @@ h2 {
 	transform: scale(1.1);
 }
 
+.rss-icon {
+  width: 24px;
+  height: 24px;
+}
+
 /* =====================
    text styles
 ===================== */
@@ -157,4 +171,35 @@ img {
 	.announcement {
 		font-size: 1rem;
 	}
+}
+
+/* =====================
+   tooltips
+===================== */
+.tooltip-container {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.tooltip-text {
+	visibility: hidden;
+	width: 300px;
+	background-color: var(--bg);
+	color: var(--text);
+	text-align: left;
+	border-radius: 6px;
+	padding: 10px;
+	position: absolute;
+	z-index: 1;
+	top: 100%;
+	left: 0;
+	opacity: 0;
+	transition: opacity 0.3s;
+	font-size: 0.875rem;
+}
+
+.tooltip-container:hover .tooltip-text {
+	visibility: visible;
+	opacity: 1;
 }

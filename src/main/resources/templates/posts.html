@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>[[${pageTitle}]] | schf.me</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+	<header>
+		<h1 th:text="${pageHeader}"></h1>
+		<nav aria-label="Main Navigation">
+			<a th:href="@{/}" class="hover-link" aria-label="Home">../</a>
+		</nav>
+	</header>
+	<main class="post-headline-container">
+		<section aria-label="Post Headlines">
+			<ul class="post-headline-list">
+				<li th:each="postHeadline : ${postHeadlines}">
+					<div class="tooltip-container">
+						<a th:href="@{${baseUrl} + '/' + ${postHeadline.title}}" class="hover-link"
+							th:aria-label="${'Post dated ' + postHeadline.publicationDate + ' titled ' + postHeadline.title}">
+							<span th:text="${postHeadline.publicationDate}"></span> -
+							<span th:text="${postHeadline.title}"></span>
+						</a>
+						<div class="tooltip-text" th:text="${postHeadline.description}"></div>
+					</div>
+				</li>
+			</ul>
+		</section>
+	</main>
+	<footer>
+		<p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
+		<div class="links">
+			<a th:href="@{/rss}" aria-label="RSS Feed" target="_blank" rel="noopener noreferrer">
+				<img th:src="@{/img/rss.svg}" alt="RSS Feed Icon" style="width: 24px; height: 24px;">
+			</a>
+		</div>
+	</footer>
+	<script th:src="@{/js/vhs.js}"></script>
+</body>
+
+</html>
