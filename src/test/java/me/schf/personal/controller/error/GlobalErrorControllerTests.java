@@ -1,4 +1,4 @@
-package me.schf.personal;
+package me.schf.personal.controller.error;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
-import me.schf.personal.controller.error.GlobalErrorController;
 
 @ExtendWith(MockitoExtension.class)
 class GlobalErrorControllerTests {

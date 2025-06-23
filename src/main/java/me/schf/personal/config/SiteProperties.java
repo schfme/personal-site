@@ -2,41 +2,23 @@ package me.schf.personal.config;
 
 public class SiteProperties {
 
-	private String igLink;
-	private String gitHubLink;
-	private String resumeLink;
-	private String emailAddress;
+	private ExternalLinkConfig externalLinkConfig;
+	private RssFeedConfig rssFeedConfig;
 
-	public String getIgLink() {
-		return igLink;
+	public ExternalLinkConfig getExternalLinkConfig() {
+		return externalLinkConfig;
 	}
 
-	public void setIgLink(String igLink) {
-		this.igLink = igLink;
+	public void setExternalLinkConfig(ExternalLinkConfig externalLinkConfig) {
+		this.externalLinkConfig = externalLinkConfig;
 	}
 
-	public String getGitHubLink() {
-		return gitHubLink;
+	public RssFeedConfig getRssFeedConfig() {
+		return rssFeedConfig;
 	}
 
-	public void setGitHubLink(String gitHubLink) {
-		this.gitHubLink = gitHubLink;
-	}
-
-	public String getResumeLink() {
-		return resumeLink;
-	}
-
-	public void setResumeLink(String resumeLink) {
-		this.resumeLink = resumeLink;
-	}
-
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+	public void setRssFeedConfig(RssFeedConfig rssFeedConfig) {
+		this.rssFeedConfig = rssFeedConfig;
 	}
 
 }

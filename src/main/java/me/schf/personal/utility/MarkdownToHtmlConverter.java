@@ -1,4 +1,4 @@
-package me.schf.personal.controller.content;
+package me.schf.personal.utility;
 
 import org.springframework.stereotype.Component;
 
@@ -6,12 +6,12 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 
 @Component
-public class MarkdownConverter {
+public class MarkdownToHtmlConverter {
 
 	private final Parser parser;
 	private final HtmlRenderer renderer;
 
-	public MarkdownConverter() {
+	public MarkdownToHtmlConverter() {
 		this.parser = Parser.builder().build();
 		this.renderer = HtmlRenderer.builder().build();
 	}

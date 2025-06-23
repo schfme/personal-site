@@ -1,37 +1,50 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <title>michael schaefer | schf.me</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/styles.css}">
+	<meta charset="utf-8">
+	<title>michael schaefer | schf.me</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" th:href="@{/styles.css}">
 </head>
+
 <body>
-<header>
-    <h1 th:text="schf.me"></h1>
-    <div class="links">
-        <a th:href="${instagramLink}" target="_blank">
-            <img th:src="@{/img/ig.svg}" alt="Instagram">
-        </a>
-        <a th:href="${githubLink}" target="_blank">
-            <img th:src="@{/img/gh.svg}" alt="GitHub">
-        </a>
-        <a th:href="'mailto:' + ${emailAddress}">
-            <img th:src="@{/img/em.svg}" alt="Email">
-        </a>
-    </div>
-</header>
-<main>
-    <section>
-        <h2><a th:href="@{/projects}" class="hover-link">/projects</a></h2>
-    </section>
-</main>
-<footer>
-    <p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
-    <a th:href="${resumeLink}" class="hover-link">work with me!</a>
-</footer>
+	<header>
+		<h1 th:text="schf.me"></h1>
+		<div class="links" aria-label="Social and Contact Links">
+			<a th:href="'mailto:' + ${emailAddress}" aria-label="Email Michael Schaefer">
+				<img th:src="@{/img/em.svg}" alt="Email Icon">
+			</a>
+			<a th:href="${linkedinLink}" target="_blank" aria-label="Michael Schaefer on LinkedIn">
+				<img th:src="@{/img/li.svg}" alt="LinkedIn Icon">
+			</a>
+			<a th:href="${githubLink}" target="_blank" aria-label="Michael Schaefer on GitHub">
+				<img th:src="@{/img/gh.svg}" alt="GitHub Icon">
+			</a>
+			<a th:href="${instagramLink}" target="_blank" aria-label="Michael Schaefer on Instagram">
+				<img th:src="@{/img/ig.svg}" alt="Instagram Icon">
+			</a>
+		</div>
+	</header>
 
-
-<script th:src="@{/js/vhs.js}"></script>
+	<main>
+		<section>
+			<h2>
+				<a th:href="@{/posts}" class="hover-link" aria-label="View all blog posts">/posts</a>
+			</h2>
+		</section>
+	</main>
+	<footer>
+		<p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
+		<a th:href="@{/resume}" 
+			class="hover-link" 
+			aria-label="View Michael Schaefer’s resume" 
+			target="_blank"
+			rel="noopener noreferrer">
+			work with me!
+		</a>
+	</footer>
+	<script th:src="@{/js/vhs.js}"></script>
 </body>
+
 </html>
