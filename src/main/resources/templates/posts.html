@@ -22,7 +22,7 @@
 					<div class="tooltip-container">
 						<a th:href="@{${baseUrl} + '/' + ${postHeadline.title}}" class="hover-link"
 							th:aria-label="${'Post dated ' + postHeadline.publicationDate + ' titled ' + postHeadline.title}">
-							<span th:text="${postHeadline.publicationDate}"></span> -
+							<span th:text="${#temporals.format(postHeadline.publicationDate, 'yyyy-MM-dd')}"></span> -
 							<span th:text="${postHeadline.title}"></span>
 						</a>
 						<div class="tooltip-text" th:text="${postHeadline.blurb}"></div>
