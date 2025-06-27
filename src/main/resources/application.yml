@@ -1,0 +1,53 @@
+server:
+  port: ${PORT:5000}
+
+spring:
+  application:
+    name: personal
+app:
+  environment: test
+  parameter-names:
+    api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
+    api-client-base-path: http://schfme-content-api-env-test.eba-kbw3y3fb.us-east-2.elasticbeanstalk.com/ #https://test.api.schf.me
+cache:
+  ttl:
+    recent-posts-cache: 5m
+    recent-post-headlines-cache: 5m
+    post-by-title-cache: 10m
+site-properties:
+  external-link-config:
+    email-address: connect@schf.me
+    git-hub-link: https://github.com/schfme
+    ig-link: https://www.instagram.com/schf.me
+    linkedin-link: https://www.linkedin.com/in/schfme/
+    resume-link: https://s3.us-east-2.amazonaws.com/assets.schf.me/resume.pdf
+
+  rss-feed-config:
+    feed-title: Updates from schf.me
+    feed-description: A pause between the playing of two tunes.
+    feed-version: 2.0
+    max-feed-entry-count: 10
+    
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+app:
+  environment: test
+  parameter-names:
+    api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
+    api-client-base-path: https://test.api.schf.me
+    
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+app:
+  environment: prod
+  parameter-names:
+    api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
+    api-client-base-path:  https://api.schf.me

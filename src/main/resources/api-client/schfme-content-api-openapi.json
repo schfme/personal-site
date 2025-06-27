@@ -1,0 +1,460 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "OpenAPI definition",
+		"version": "v0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:5000",
+			"description": "Generated server url"
+		}
+	],
+	"tags": [
+		{
+			"name": "Posts",
+			"description": "API for managing blog posts"
+		},
+		{
+			"name": "Post Headlines",
+			"description": "Lighterweight previews of blog posts"
+		}
+	],
+	"paths": {
+		"/posts": {
+			"get": {
+				"tags": [
+					"Posts"
+				],
+				"summary": "Search posts with filters",
+				"operationId": "getPosts",
+				"parameters": [
+					{
+						"name": "from",
+						"in": "query",
+						"description": "Filter posts from this date/time (ISO-8601 format)",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"format": "date-time"
+						}
+					},
+					{
+						"name": "to",
+						"in": "query",
+						"description": "Filter posts up to this date/time (ISO-8601 format)",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"format": "date-time"
+						}
+					},
+					{
+						"name": "title",
+						"in": "query",
+						"description": "Filter posts by title",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "author",
+						"in": "query",
+						"description": "Filter posts by author",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "sharePost",
+						"in": "query",
+						"description": "Filter posts by sharePost flag",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Post probe to filter on",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Post"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "List of matching posts",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Post"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Posts"
+				],
+				"summary": "Create or update a post",
+				"operationId": "createOrUpdatePost",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Post"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Post created or updated",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Post"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid post data",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Post"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/posts/{id}": {
+			"get": {
+				"tags": [
+					"Posts"
+				],
+				"summary": "Get a post by ID",
+				"operationId": "getPostById",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of the post to retrieve",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Post found",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Post"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid post ID",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Post"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Post not found",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Post"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"Posts"
+				],
+				"summary": "Delete a post by ID",
+				"operationId": "deletePost",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of the post to delete",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Post deleted successfully"
+					},
+					"400": {
+						"description": "Invalid post ID"
+					},
+					"404": {
+						"description": "Post not found"
+					}
+				}
+			}
+		},
+		"/posts/recent": {
+			"get": {
+				"tags": [
+					"Posts"
+				],
+				"summary": "Get recent posts",
+				"operationId": "getRecentPosts",
+				"parameters": [
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "Number of posts to return (1-100)",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"default": 10,
+							"maximum": 100,
+							"minimum": 1
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "List of recent posts",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Post"
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid limit parameter",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Post"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/posts/headlines/{id}": {
+			"get": {
+				"tags": [
+					"Post Headlines"
+				],
+				"summary": "Get a post headline by ID",
+				"operationId": "getPostHeadlineById",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of the post to retrieve",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Post headline found",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/PostHeadline"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid post ID",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/PostHeadline"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Post not found",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/PostHeadline"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/posts/headlines/recent": {
+			"get": {
+				"tags": [
+					"Post Headlines"
+				],
+				"summary": "Get recent post headlines",
+				"operationId": "getRecentPostHeadlines",
+				"parameters": [
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "Number of headlines to return (1–100)",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"default": 10,
+							"maximum": 100,
+							"minimum": 1
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "List of recent post headlines",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/PostHeadline"
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid limit parameter",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/PostHeadline"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Post": {
+				"type": "object",
+				"properties": {
+					"postHeadline": {
+						"$ref": "#/components/schemas/PostHeadline"
+					},
+					"author": {
+						"type": "string",
+						"maxLength": 50,
+						"minLength": 0
+					},
+					"markdownText": {
+						"type": "string",
+						"maxLength": 20000,
+						"minLength": 0
+					},
+					"tags": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"enum": [
+								"ART",
+								"ARTWARE",
+								"DEMOSCENE",
+								"DESIGN",
+								"DEVLOG",
+								"GAMES",
+								"LOWLEVEL",
+								"MATH",
+								"MISC",
+								"PERFORMANCE",
+								"PERSONAL",
+								"PROGRAMMING",
+								"TUTORIAL",
+								"UPDATES"
+							]
+						},
+						"maxItems": 2147483647,
+						"minItems": 1
+					},
+					"sharePost": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"author",
+					"markdownText",
+					"postHeadline",
+					"tags"
+				]
+			},
+			"PostHeadline": {
+				"type": "object",
+				"properties": {
+					"title": {
+						"type": "string",
+						"maxLength": 100,
+						"minLength": 0
+					},
+					"publicationDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"blurb": {
+						"type": "string",
+						"maxLength": 300,
+						"minLength": 0
+					}
+				},
+				"required": [
+					"publicationDate",
+					"title"
+				]
+			}
+		}
+	}
+}
