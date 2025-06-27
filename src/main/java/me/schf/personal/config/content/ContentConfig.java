@@ -1,4 +1,4 @@
-package me.schf.personal.config;
+package me.schf.personal.config.content;
 
 import java.time.LocalDate;
 
@@ -6,9 +6,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import me.schf.personal.config.site.SiteProperties;
+import me.schf.personal.config.site.SiteProperties.RssFeedConfig;
 import me.schf.personal.controller.rss.RssEntry;
 import me.schf.personal.controller.rss.RssFeed;
-import me.schf.personal.data.PostService;
+import me.schf.personal.service.PostsService;
 
 @Configuration
 public class ContentConfig {
@@ -22,11 +24,10 @@ public class ContentConfig {
 	@ConfigurationProperties("site-properties")
 	SiteProperties siteProperties() {
 		return new SiteProperties();
-
 	}
 	
 	@Bean
-	RssFeed rssFeed(SiteProperties siteProperties, PostService postService) {
+	RssFeed rssFeed(SiteProperties siteProperties, PostsService postsService) {
 		RssFeedConfig config = siteProperties.getRssFeedConfig();
 		
 		RssFeed.Channel channel = new RssFeed.Channel.Builder()
@@ -36,10 +37,9 @@ public class ContentConfig {
 				.maxSize(config.getMaxFeedEntryCount())
 				.build();
 		
-		postService.getTopNMostRecentPosts(config.getMaxFeedEntryCount())
-				.stream()
-				.map(RssEntry::fromPost)
-				.forEach(channel::offerItem);
+		postsService.getRecentPosts().stream()
+			.map(RssEntry::fromPostDto)	
+			.forEach(channel::offerItem);
 		
 		return new RssFeed.Builder()
 				.version(config.getFeedVersion())

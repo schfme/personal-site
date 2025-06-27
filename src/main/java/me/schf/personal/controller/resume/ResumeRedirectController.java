@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-import me.schf.personal.config.ExternalLinkConfig;
-import me.schf.personal.config.SiteProperties;
+import me.schf.personal.config.site.SiteProperties;
+import me.schf.personal.config.site.SiteProperties.ExternalLinkConfig;
 
 @Controller
 public class ResumeRedirectController {

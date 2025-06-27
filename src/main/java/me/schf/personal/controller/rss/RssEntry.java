@@ -1,11 +1,10 @@
 package me.schf.personal.controller.rss;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import me.schf.personal.data.Post;
+import me.schf.personal.service.domain.PostDto;
 
 public record RssEntry(
 
@@ -15,17 +14,17 @@ public record RssEntry(
 
 		@JacksonXmlProperty(localName = "description") String description,
 
-		@JacksonXmlProperty(localName = "pubDate") @JsonDeserialize(using = ZonedDateTimeDeserializer.class) ZonedDateTime pubDate,
+		@JacksonXmlProperty(localName = "pubDate") OffsetDateTime pubDate,
 
 		@JacksonXmlProperty(localName = "author") String author) {
 	
 	
-	public static RssEntry fromPost(Post post) {
-		return new RssEntry(post.getTitle(),
-				"https://schf.me/posts/%s".formatted(post.getTitle()), 
-				post.getDescription(), 
-				post.getPublicationDate(), 
-				post.getAuthor()
+	public static RssEntry fromPostDto(PostDto postDto) {
+		return new RssEntry(postDto.getPostHeadline().getTitle(),
+				"https://schf.me/posts/%s".formatted(postDto.getPostHeadline().getTitle()), 
+				postDto.getPostHeadline().getBlurb(), 
+				postDto.getPostHeadline().getPublicationDate(), 
+				postDto.getAuthor()
 			);		
 	}
 	

@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
+		<version>3.5.3</version>
 		<relativePath />
 	</parent>
 	<groupId>me.schf</groupId>
 	<artifactId>personal</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.7</version>
 	<name>personal</name>
 	<description>Personal Web Page</description>
 	<url />
@@ -67,13 +67,34 @@
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>ssm</artifactId>
 			<version>2.31.68</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.cache2k</groupId>
+			<artifactId>cache2k-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.cache2k</groupId>
+			<artifactId>cache2k-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.cache2k</groupId>
+			<artifactId>cache2k-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -109,6 +130,58 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.14.0</version>
+				<executions>
+					<execution>
+						<id>generate-api-client</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/api-client/schfme-content-api-openapi.json
+							</inputSpec>
+							<skipValidateSpec>true</skipValidateSpec>
+							<output>
+								${project.build.directory}/generated-sources/openapi</output>
+							<generatorName>java</generatorName>
+							<apiPackage>me.schf.api.client.api</apiPackage>
+							<modelPackage>me.schf.api.client.model</modelPackage>
+							<invokerPackage>me.schf.api.client.invoker</invokerPackage>
+							<configOptions>
+								<useJakartaEe>true</useJakartaEe>
+								<library>resttemplate</library>
+								<dateLibrary>java8</dateLibrary>
+								<useSpringBoot3>true</useSpringBoot3>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-generated-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>
+									${project.build.directory}/generated-sources/openapi/src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

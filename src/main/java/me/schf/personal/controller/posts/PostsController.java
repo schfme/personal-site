@@ -1,7 +1,6 @@
 package me.schf.personal.controller.posts;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
-import me.schf.personal.data.Post;
-import me.schf.personal.data.PostService;
+import me.schf.personal.service.PostsService;
+import me.schf.personal.service.domain.PostDto;
 import me.schf.personal.utility.MarkdownToHtmlConverter;
 
 @Controller
@@ -21,20 +20,21 @@ public class PostsController {
 	private static final String BASE_URL = "/" + PAGE_TITLE;
 
 	private final LocalDate today;
-	private final PostService postService;
-	private final MarkdownToHtmlConverter markdownToHtmlConverter;
+	private final PostsService postsService;
 
-	public PostsController(LocalDate today, PostService postService) {
+	private final MarkdownToHtmlConverter markdownToHtmlConverter;
+	
+	public PostsController(LocalDate today, PostsService postsService) {
 		super();
 		this.today = today;
-		this.postService = postService;
+		this.postsService = postsService;
 		this.markdownToHtmlConverter = new MarkdownToHtmlConverter();
 	}
 
 	@GetMapping(BASE_URL)
 	public String posts(Model model) {
 		model.addAttribute("year", today.getYear());
-		model.addAttribute("postHeadlines", this.getPostHeadlines());
+		model.addAttribute("postHeadlines", postsService.getRecentPostHeadlines());
 		model.addAttribute("baseUrl", BASE_URL);
 		model.addAttribute("pageTitle", PAGE_TITLE);
 		model.addAttribute("pageHeader", BASE_URL);
@@ -48,26 +48,19 @@ public class PostsController {
 
 	public String detail(String link, Model model) {
 		
-		Post post = postService.getAllPostsByTitle().get(link);
+		PostDto postDto = postsService.getPostByTitle(link);
 		
-		if (post == null) {
+		if (postDto == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 		
 		model.addAttribute("year", today.getYear());
-		model.addAttribute("postHeadline", post.getTitle());
-		model.addAttribute("pageTitle", post.getTitle());
-		model.addAttribute("pageHeader", "/" + post.getTitle());
-		model.addAttribute("markdownContent", markdownToHtmlConverter.convertToHtml(post.getMarkdownText()));
+		model.addAttribute("postHeadline", postDto.getPostHeadline().getTitle());
+		model.addAttribute("pageTitle", postDto.getPostHeadline().getTitle());
+		model.addAttribute("pageHeader", "/" + postDto.getPostHeadline().getTitle());
+		model.addAttribute("markdownContent", markdownToHtmlConverter.convertToHtml(postDto.getMarkdownText()));
 
 		return "post-detail";
 	}
-	
-	private List<PostHeadline> getPostHeadlines() {
-		return postService.getAllPostsByTitle()
-			.values()
-			.stream()
-			.map(PostHeadline::fromPost)
-			.toList();
-	}
+
 }
