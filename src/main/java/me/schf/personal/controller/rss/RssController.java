@@ -14,7 +14,7 @@ public class RssController {
 		this.rssFeed = rssFeed;
 	}
 
-	@GetMapping(value = "/rss", produces = MediaType.APPLICATION_XML_VALUE)
+	@GetMapping(value = "/posts/rss", produces = MediaType.APPLICATION_XML_VALUE)
 	public RssFeed getRssFeed() {
 		return rssFeed;
 	}

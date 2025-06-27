@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import me.schf.personal.config.SiteProperties;
+import me.schf.personal.config.site.SiteProperties;
 
 @Controller
 public class HomeController {

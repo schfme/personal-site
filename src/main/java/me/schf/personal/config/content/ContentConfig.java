@@ -1,4 +1,4 @@
-package me.schf.personal.config;
+package me.schf.personal.config.content;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import me.schf.personal.config.SiteProperties.RssFeedConfig;
+import me.schf.personal.config.site.SiteProperties;
+import me.schf.personal.config.site.SiteProperties.RssFeedConfig;
 import me.schf.personal.controller.rss.RssEntry;
 import me.schf.personal.controller.rss.RssFeed;
 import me.schf.personal.service.PostsService;

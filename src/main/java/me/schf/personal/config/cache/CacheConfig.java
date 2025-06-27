@@ -1,4 +1,4 @@
-package me.schf.personal.config;
+package me.schf.personal.config.cache;
 
 import org.cache2k.extra.spring.SpringCache2kCacheManager;
 import org.springframework.cache.CacheManager;

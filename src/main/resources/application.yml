@@ -8,7 +8,12 @@ app:
   environment: test
   parameter-names:
     api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
-    api-client-base-path: http://schfme-content-api-env-test.eba-kbw3y3fb.us-east-2.elasticbeanstalk.com/ #https://test.api.schf.me
+    api-client-base-path-name: "/schfme-content-api/${app.environment}/base-path"
+    cluster-name: "/schfme/${app.environment}/database/connection/cluster-name"
+    host: "/schfme/${app.environment}/database/connection/host"
+    database-name: "/schfme/${app.environment}/database/name"
+    service-name: "/schfme/${app.environment}/database/service/name"
+    service-password: "/schfme/${app.environment}/database/service/password"
 cache:
   ttl:
     recent-posts-cache: 5m

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import me.schf.api.client.api.PostHeadlinesApi;
 import me.schf.api.client.api.PostsApi;
-import me.schf.personal.config.SiteProperties;
+import me.schf.personal.config.site.SiteProperties;
 import me.schf.personal.service.domain.PostDto;
 import me.schf.personal.service.domain.PostDto.PostHeadlineDto;
 import me.schf.personal.utility.PostConverter;

@@ -28,15 +28,21 @@ public class AppConfig {
 	}
 
 	public static class ParameterNames {
-		private String apiClientBasePath;
+		private String apiClientBasePathName;
 		private String apiClientKeyName;
+		private String apiKeysPath;
+		private String clusterName;
+		private String databaseName;
+		private String host;
+		private String serviceName;
+		private String servicePassword;
 
-		public String getApiClientBasePath() {
-			return apiClientBasePath;
+		public String getApiClientBasePathName() {
+			return apiClientBasePathName;
 		}
 
-		public void setApiClientBasePath(String apiClientBasePath) {
-			this.apiClientBasePath = apiClientBasePath;
+		public void setApiClientBasePathName(String apiClientBasePathName) {
+			this.apiClientBasePathName = apiClientBasePathName;
 		}
 
 		public String getApiClientKeyName() {
@@ -46,5 +52,54 @@ public class AppConfig {
 		public void setApiClientKeyName(String apiClientKeyName) {
 			this.apiClientKeyName = apiClientKeyName;
 		}
+
+		public String getApiKeysPath() {
+			return apiKeysPath;
+		}
+
+		public void setApiKeysPath(String apiKeysPath) {
+			this.apiKeysPath = apiKeysPath;
+		}
+
+		public String getClusterName() {
+			return clusterName;
+		}
+
+		public void setClusterName(String clusterName) {
+			this.clusterName = clusterName;
+		}
+
+		public String getDatabaseName() {
+			return databaseName;
+		}
+
+		public void setDatabaseName(String databaseName) {
+			this.databaseName = databaseName;
+		}
+
+		public String getHost() {
+			return host;
+		}
+
+		public void setHost(String host) {
+			this.host = host;
+		}
+
+		public String getServiceName() {
+			return serviceName;
+		}
+
+		public void setServiceName(String serviceName) {
+			this.serviceName = serviceName;
+		}
+
+		public String getServicePassword() {
+			return servicePassword;
+		}
+
+		public void setServicePassword(String servicePassword) {
+			this.servicePassword = servicePassword;
+		}
+
 	}
 }

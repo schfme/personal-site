@@ -1,4 +1,4 @@
-package me.schf.personal.config;
+package me.schf.personal.config.cache;
 import java.time.Duration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

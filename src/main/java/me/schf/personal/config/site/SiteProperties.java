@@ -1,4 +1,4 @@
-package me.schf.personal.config;
+package me.schf.personal.config.site;
 
 public class SiteProperties {
 
