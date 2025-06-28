@@ -19,7 +19,7 @@ public class CacheConfig {
 
 	@Bean
 	CacheManager cacheManager() {
-		SpringCache2kCacheManager cacheManager = new SpringCache2kCacheManager();
+		var cacheManager = new SpringCache2kCacheManager();
 
 		cacheManager.addCache("postByTitleCache", c -> c.expireAfterWrite(cacheTtlProperties.getPostByTitleCache()));
 		cacheManager.addCache("recentPostsCache", c -> c.expireAfterWrite(cacheTtlProperties.getRecentPostsCache()));

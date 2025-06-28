@@ -22,7 +22,7 @@ public class GlobalErrorController implements ErrorController {
     
     @GetMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
-        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        var status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         model.addAttribute("year", today.getYear());
         
         int statusCode = 0;

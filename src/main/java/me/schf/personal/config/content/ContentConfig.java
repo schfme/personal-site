@@ -30,7 +30,7 @@ public class ContentConfig {
 	RssFeed rssFeed(SiteProperties siteProperties, PostsService postsService) {
 		RssFeedConfig config = siteProperties.getRssFeedConfig();
 		
-		RssFeed.Channel channel = new RssFeed.Channel.Builder()
+		var channel = new RssFeed.Channel.Builder()
 				.title(config.getFeedTitle())
 				.link("schf.me/posts/rss")
 				.description(config.getFeedDescription())

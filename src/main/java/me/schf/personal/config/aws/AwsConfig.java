@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.services.ssm.SsmClient;
 import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 import software.amazon.awssdk.services.ssm.model.GetParametersByPathRequest;
-import software.amazon.awssdk.services.ssm.model.GetParametersByPathResponse;
 
 @Configuration
 public class AwsConfig {
@@ -34,8 +33,8 @@ public class AwsConfig {
         return new ParameterRetriever() {
             @Override
             public String getParameter(String parameterName) {
-                SsmClient ssmClient = ssmClientProvider.getClient();
-                GetParameterRequest request = GetParameterRequest.builder()
+                var ssmClient = ssmClientProvider.getClient();
+                var request = GetParameterRequest.builder()
                         .name(parameterName)
                         .withDecryption(true)
                         .build();
@@ -45,19 +44,19 @@ public class AwsConfig {
 
             @Override
             public Map<String, String> getParametersByPath(String path, boolean recursive) {
-                SsmClient ssmClient = ssmClientProvider.getClient();
+                var ssmClient = ssmClientProvider.getClient();
                 Map<String, String> parameters = new HashMap<>();
                 String nextToken = null;
 
                 do {
-                    GetParametersByPathRequest request = GetParametersByPathRequest.builder()
+                    var request = GetParametersByPathRequest.builder()
                             .path(path)
                             .withDecryption(true)
                             .recursive(recursive)
                             .nextToken(nextToken)
                             .build();
 
-                    GetParametersByPathResponse response = ssmClient.getParametersByPath(request);
+                    var response = ssmClient.getParametersByPath(request);
 
                     response.parameters().forEach(param -> parameters.put(param.name(), param.value()));
                     nextToken = response.nextToken();
