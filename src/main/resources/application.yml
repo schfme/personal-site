@@ -1,7 +1,10 @@
 server:
   port: ${PORT:5000}
-
 spring:
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+    - org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration
   application:
     name: personal
 app:
