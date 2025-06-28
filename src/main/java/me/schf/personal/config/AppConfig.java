@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
 	private String environment;
-
-	private ParameterNames parameterNames = new ParameterNames();
+	private ParameterNames parameterNames;
 
 	public String getEnvironment() {
 		return environment;
@@ -36,6 +35,7 @@ public class AppConfig {
 		private String host;
 		private String serviceName;
 		private String servicePassword;
+		private String emailAddressName;
 
 		public String getApiClientBasePathName() {
 			return apiClientBasePathName;
@@ -99,6 +99,14 @@ public class AppConfig {
 
 		public void setServicePassword(String servicePassword) {
 			this.servicePassword = servicePassword;
+		}
+
+		public String getEmailAddressName() {
+			return emailAddressName;
+		}
+
+		public void setEmailAddressName(String emailAddressName) {
+			this.emailAddressName = emailAddressName;
 		}
 
 	}

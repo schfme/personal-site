@@ -1,12 +1,16 @@
 server:
   port: ${PORT:5000}
-
 spring:
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+    - org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration
   application:
     name: personal
 app:
   environment: test
   parameter-names:
+    email-address-name: /schfme/email/connect
     api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
     api-client-base-path-name: "/schfme-content-api/${app.environment}/base-path"
     cluster-name: "/schfme/${app.environment}/database/connection/cluster-name"
@@ -21,7 +25,6 @@ cache:
     post-by-title-cache: 10m
 site-properties:
   external-link-config:
-    email-address: connect@schf.me
     git-hub-link: https://github.com/schfme
     ig-link: https://www.instagram.com/schf.me
     linkedin-link: https://www.linkedin.com/in/schfme/

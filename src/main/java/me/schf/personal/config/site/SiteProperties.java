@@ -48,15 +48,10 @@ public class SiteProperties {
 	
 	public static class ExternalLinkConfig {
 
-		private String emailAddress;
 		private String gitHubLink;
 		private String igLink;
 		private String linkedinLink;
 		private String resumeLink;
-
-		public String getEmailAddress() {
-			return emailAddress;
-		}
 
 		public String getGitHubLink() {
 			return gitHubLink;
@@ -72,10 +67,6 @@ public class SiteProperties {
 
 		public String getResumeLink() {
 			return resumeLink;
-		}
-
-		public void setEmailAddress(String emailAddress) {
-			this.emailAddress = emailAddress;
 		}
 
 		public void setGitHubLink(String gitHubLink) {

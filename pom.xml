@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>me.schf</groupId>
 	<artifactId>personal</artifactId>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<name>personal</name>
 	<description>Personal Web Page</description>
 	<url />
@@ -94,7 +94,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
 		</dependency>
 	</dependencies>
 

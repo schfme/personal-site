@@ -17,7 +17,7 @@ public class PostConverter {
 			return null;
 		}
 
-		PostHeadlineDto dto = new PostHeadlineDto();
+		var dto = new PostHeadlineDto();
 		dto.setTitle(headline.getTitle());
 		dto.setPublicationDate(headline.getPublicationDate());
 		dto.setBlurb(headline.getBlurb());
@@ -29,7 +29,7 @@ public class PostConverter {
 			return null;
 		}
 
-		PostHeadline headline = new PostHeadline();
+		var headline = new PostHeadline();
 		headline.setTitle(dto.getTitle());
 		headline.setPublicationDate(dto.getPublicationDate());
 		headline.setBlurb(dto.getBlurb());
@@ -41,7 +41,7 @@ public class PostConverter {
 			return null;
 		}
 		
-		PostDto dto = new PostDto();
+		var dto = new PostDto();
 		dto.setAuthor(post.getAuthor());
 		dto.setMarkdownText(post.getMarkdownText());
 		dto.setSharePost(post.getSharePost());
@@ -59,7 +59,7 @@ public class PostConverter {
 			return null;
 		}
 
-		Post post = new Post();
+		var post = new Post();
 		post.setAuthor(dto.getAuthor());
 		post.setMarkdownText(dto.getMarkdownText());
 		post.setSharePost(dto.getSharePost());

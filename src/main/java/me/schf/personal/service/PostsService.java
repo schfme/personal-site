@@ -2,7 +2,6 @@ package me.schf.personal.service;
 
 import java.util.List;
 
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -45,7 +44,7 @@ public class PostsService {
 	}
 
 	public List<PostHeadlineDto> getRecentPostHeadlines() {
-		Cache cache = cacheManager.getCache("recentPostsCache");
+		var cache = cacheManager.getCache("recentPostsCache");
 
 		// if we've recently already called getRecentPosts, we can get the headlines from that.
 		if (cache != null) {

@@ -2,10 +2,10 @@ package me.schf.personal.config.database;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+import com.mongodb.reactivestreams.client.MongoClient;
+import com.mongodb.reactivestreams.client.MongoClients;
 
 import me.schf.personal.config.AppConfig;
 import me.schf.personal.config.AppConfig.ParameterNames;
@@ -60,7 +60,7 @@ public class DatabaseConfig {
 	}
 	
 	@Configuration
-	public static class MongoConfig extends AbstractMongoClientConfiguration {
+	public static class MongoConfig extends AbstractReactiveMongoConfiguration  {
 
 		private final DatabaseConnection mongoConnection;
 
@@ -78,10 +78,10 @@ public class DatabaseConfig {
 					"Unexpected state. Given DatabaseConnection was not of type MongoConnection.");
 		}
 		
-		@Override
-		public MongoClient mongoClient() {
-			return MongoClients.create(mongoConnection.getConnectionUri());
-		}
+        @Override
+        public MongoClient reactiveMongoClient() {
+            return MongoClients.create(mongoConnection.getConnectionUri());
+        }
 
 	}
 }
