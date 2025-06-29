@@ -46,8 +46,6 @@ app:
   environment: test
   parameter-names:
     api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
-    api-client-base-path: https://test.api.schf.me
-    
 ---
 spring:
   config:
@@ -58,4 +56,3 @@ app:
   environment: prod
   parameter-names:
     api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
-    api-client-base-path:  https://api.schf.me
