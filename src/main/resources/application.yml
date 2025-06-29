@@ -44,8 +44,6 @@ spring:
 
 app:
   environment: test
-  parameter-names:
-    api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
 ---
 spring:
   config:
@@ -54,5 +52,3 @@ spring:
 
 app:
   environment: prod
-  parameter-names:
-    api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
