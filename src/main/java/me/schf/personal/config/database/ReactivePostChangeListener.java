@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.event.EventListener;
-import org.springframework.data.mongodb.core.ChangeStreamEvent;
 import org.springframework.data.mongodb.core.ChangeStreamOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -17,12 +16,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PreDestroy;
+import me.schf.personal.controller.rss.PubSubHubbubNotifier;
 import me.schf.personal.controller.rss.RssEntry;
 import me.schf.personal.controller.rss.RssFeed;
 import me.schf.personal.service.domain.PostDto;
 import me.schf.personal.service.domain.PostDto.PostHeadlineDto;
 import reactor.core.Disposable;
-import reactor.core.publisher.Flux;
 
 @Component
 public class ReactivePostChangeListener {
@@ -30,17 +29,19 @@ public class ReactivePostChangeListener {
 	private final ReactiveMongoTemplate reactiveMongoTemplate;
 	private final RssFeed rssFeed;
 	private final CacheManager cacheManager;
+	private final PubSubHubbubNotifier hubNotifier;
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	private Disposable subscription;
 
 	public ReactivePostChangeListener(ReactiveMongoTemplate reactiveMongoTemplate, RssFeed rssFeed,
-			CacheManager cacheManager) {
+			CacheManager cacheManager, PubSubHubbubNotifier hubNotifier) {
 		super();
 		this.reactiveMongoTemplate = reactiveMongoTemplate;
 		this.rssFeed = rssFeed;
 		this.cacheManager = cacheManager;
+		this.hubNotifier = hubNotifier;
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
@@ -49,21 +50,22 @@ public class ReactivePostChangeListener {
                 Aggregation.match(Criteria.where("operationType").is("insert"))
         );
 
-        ChangeStreamOptions options = ChangeStreamOptions.builder()
+        var options = ChangeStreamOptions.builder()
                 .filter(filter)
                 .returnFullDocumentOnUpdate()
                 .build();
 
-		Flux<ChangeStreamEvent<Document>> changeStream = reactiveMongoTemplate.changeStream(options, Document.class);
+		var changeStream = reactiveMongoTemplate.changeStream(options, Document.class);
 
         subscription = changeStream.subscribe(event -> {
             Document doc = event.getBody(); // full document of the changed record
             if (doc != null) {
                 logger.info("New reactive post inserted: {}", doc.toJson());
                 PostDto post = convertToPostDto(doc);
+                evictRecentPostCache();
                 if (Boolean.TRUE.equals(post.getSharePost())) {
                     updateRssFeed(post);
-                    evictRecentPostCache();
+                    hubNotifier.notifyHub();
                 }
             }
         });
