@@ -1,5 +1,8 @@
 server:
   port: ${PORT:5000}
+logging:
+  level:
+    root: ERROR
 spring:
   autoconfigure:
     exclude:
@@ -29,7 +32,6 @@ site-properties:
     ig-link: https://www.instagram.com/schf.me
     linkedin-link: https://www.linkedin.com/in/schfme/
     resume-link: https://s3.us-east-2.amazonaws.com/assets.schf.me/resume.pdf
-
   rss-feed-config:
     feed-title: Updates from schf.me
     feed-description: A pause between the playing of two tunes.
@@ -44,10 +46,6 @@ spring:
 
 app:
   environment: test
-  parameter-names:
-    api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
-    api-client-base-path: https://test.api.schf.me
-    
 ---
 spring:
   config:
@@ -56,6 +54,3 @@ spring:
 
 app:
   environment: prod
-  parameter-names:
-    api-client-key-name: "/schfme-content-api/${app.environment}/api-keys/schfme"
-    api-client-base-path:  https://api.schf.me

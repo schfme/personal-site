@@ -7,10 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import me.schf.personal.config.site.SiteProperties;
-import me.schf.personal.config.site.SiteProperties.RssFeedConfig;
-import me.schf.personal.controller.rss.RssEntry;
-import me.schf.personal.controller.rss.RssFeed;
-import me.schf.personal.service.PostsService;
 
 @Configuration
 public class ContentConfig {
@@ -26,25 +22,4 @@ public class ContentConfig {
 		return new SiteProperties();
 	}
 	
-	@Bean
-	RssFeed rssFeed(SiteProperties siteProperties, PostsService postsService) {
-		RssFeedConfig config = siteProperties.getRssFeedConfig();
-		
-		var channel = new RssFeed.Channel.Builder()
-				.title(config.getFeedTitle())
-				.link("schf.me/posts/rss")
-				.description(config.getFeedDescription())
-				.maxSize(config.getMaxFeedEntryCount())
-				.build();
-		
-		postsService.getRecentPosts().stream()
-			.map(RssEntry::fromPostDto)	
-			.forEach(channel::offerItem);
-		
-		return new RssFeed.Builder()
-				.version(config.getFeedVersion())
-				.channel(channel)
-				.build();				
-	}
-
 }
