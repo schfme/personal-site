@@ -1,12 +1,17 @@
 package me.schf.personal.controller.rss;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+
+@JacksonXmlRootElement(localName = "rss", namespace = "http://www.w3.org/2005/Atom")
 public class RssFeed {
 
 	@JacksonXmlProperty(isAttribute = true)
@@ -55,6 +60,7 @@ public class RssFeed {
 
 	public static class Channel {
 		private String title;
+		@JacksonXmlProperty(localName = "link")
 		private String link;
 		private String description;
 		@JsonIgnore
@@ -63,9 +69,13 @@ public class RssFeed {
 		@JacksonXmlElementWrapper(useWrapping = false)
 		@JacksonXmlProperty(localName = "item")
 		private Deque<RssEntry> items;
+		
+		@JacksonXmlElementWrapper(useWrapping = false)
+		private List<AtomLink> atomLinks;
 
 		public Channel() {
 			items = new ArrayDeque<>();
+			atomLinks = new ArrayList<>();
 		}
 
 		public String getTitle() {
@@ -136,6 +146,11 @@ public class RssFeed {
 
 			public Channel build() {
 				return channel;
+			}
+			
+			public Builder addAtomLink(AtomLink atomLink) {
+				channel.atomLinks.add(atomLink);
+				return this;
 			}
 		}
 	}
