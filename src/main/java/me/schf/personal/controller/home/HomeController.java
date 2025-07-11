@@ -37,6 +37,9 @@ public class HomeController {
 		model.addAttribute("instagramLink", siteProperties.getExternalLinkConfig().getIgLink());
 		model.addAttribute("linkedinLink", siteProperties.getExternalLinkConfig().getLinkedinLink());
 		model.addAttribute("resumeLink", siteProperties.getExternalLinkConfig().getResumeLink());
+		model.addAttribute("cubeeLink", siteProperties.getExternalLinkConfig().getCubeeLink());
+		model.addAttribute("aiTunnelLink", siteProperties.getExternalLinkConfig().getAiTunnelLink());
+
 
 		return "home";
 	}
