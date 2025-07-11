@@ -1,8 +1,8 @@
 server:
   port: ${PORT:5000}
-logging:
-  level:
-    root: ERROR
+#logging:
+#  level:
+#    root: ERROR
 spring:
   autoconfigure:
     exclude:
@@ -28,6 +28,8 @@ cache:
     post-by-title-cache: 10m
 site-properties:
   external-link-config:
+    ai-tunnel-link: https://test.ai.tunnel.schf.me/
+    cubee-link: https://test.cubee.schf.me/
     git-hub-link: https://github.com/schfme
     ig-link: https://www.instagram.com/schf.me
     linkedin-link: https://www.linkedin.com/in/schfme/
@@ -54,3 +56,7 @@ spring:
 
 app:
   environment: prod
+site-properties:
+  external-link-config:
+    ai-tunnel-link: https://ai.tunnel.schf.me/
+    cubee-link: https://cubee.schf.me/

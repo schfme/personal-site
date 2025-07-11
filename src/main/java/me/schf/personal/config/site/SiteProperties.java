@@ -4,7 +4,7 @@ public class SiteProperties {
 
 	private ExternalLinkConfig externalLinkConfig;
 	private RssFeedConfig rssFeedConfig;
-	
+
 	public static class RssFeedConfig {
 
 		private String feedDescription;
@@ -45,13 +45,15 @@ public class SiteProperties {
 		}
 
 	}
-	
+
 	public static class ExternalLinkConfig {
 
 		private String gitHubLink;
 		private String igLink;
 		private String linkedinLink;
 		private String resumeLink;
+		private String cubeeLink;
+		private String aiTunnelLink;
 
 		public String getGitHubLink() {
 			return gitHubLink;
@@ -83,6 +85,22 @@ public class SiteProperties {
 
 		public void setResumeLink(String resumeLink) {
 			this.resumeLink = resumeLink;
+		}
+
+		public String getCubeeLink() {
+			return cubeeLink;
+		}
+
+		public void setCubeeLink(String cubeeLink) {
+			this.cubeeLink = cubeeLink;
+		}
+
+		public String getAiTunnelLink() {
+			return aiTunnelLink;
+		}
+
+		public void setAiTunnelLink(String aiTunnelLink) {
+			this.aiTunnelLink = aiTunnelLink;
 		}
 
 	}

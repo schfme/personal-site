@@ -6,40 +6,90 @@
 	<title>michael schaefer | schf.me</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" th:href="@{/styles.css}">
+	<link rel="icon" th:href="@{/img/favicon/schfme.ico}" type="image/x-icon" />
+	<link rel="icon" th:href="@{/img/apps/schfme.svg}" type="image/svg+xml" />
+</head>
 </head>
 
 <body>
 	<header>
 		<h1 th:text="schf.me"></h1>
 		<div class="links" aria-label="Social and Contact Links">
-			<a th:href="'mailto:' + ${emailAddress}" aria-label="Email Michael Schaefer">
-				<img th:src="@{/img/em.svg}" alt="Email Icon">
-			</a>
-			<a th:href="${linkedinLink}" target="_blank" aria-label="Michael Schaefer on LinkedIn">
-				<img th:src="@{/img/li.svg}" alt="LinkedIn Icon">
-			</a>
-			<a th:href="${githubLink}" target="_blank" aria-label="Michael Schaefer on GitHub">
-				<img th:src="@{/img/gh.svg}" alt="GitHub Icon">
-			</a>
-			<a th:href="${instagramLink}" target="_blank" aria-label="Michael Schaefer on Instagram">
-				<img th:src="@{/img/ig.svg}" alt="Instagram Icon">
-			</a>
+			<span class="tooltip-container">
+				<a th:href="'mailto:' + ${emailAddress}" aria-label="Email Michael Schaefer">
+					<img th:src="@{/img/social/em.svg}" alt="Email Icon">
+				</a>
+				<span class="tooltip-text">Email Michael</span>
+			</span>
+
+			<span class="tooltip-container">
+				<a th:href="${linkedinLink}" target="_blank" rel="noopener noreferrer"
+					aria-label="Michael Schaefer on LinkedIn">
+					<img th:src="@{/img/social/li.svg}" alt="LinkedIn Icon">
+				</a>
+				<span class="tooltip-text">LinkedIn</span>
+			</span>
+
+			<span class="tooltip-container">
+				<a th:href="${githubLink}" target="_blank" rel="noopener noreferrer"
+					aria-label="Michael Schaefer on GitHub">
+					<img th:src="@{/img/social/gh.svg}" alt="GitHub Icon">
+				</a>
+				<span class="tooltip-text">GitHub</span>
+			</span>
+
+			<span class="tooltip-container">
+				<a th:href="${instagramLink}" target="_blank" rel="noopener noreferrer"
+					aria-label="Michael Schaefer on Instagram">
+					<img th:src="@{/img/social/ig.svg}" alt="Instagram Icon">
+				</a>
+				<span class="tooltip-text">Instagram</span>
+			</span>
 		</div>
 	</header>
 
+
 	<main>
 		<section>
-			<h2>
-				<a th:href="@{/posts}" class="hover-link" aria-label="View all blog posts">/posts</a>
-			</h2>
+			<h2>explore</h2>
+			<div class="icon-grid">
+
+				<div class="tooltip-container">
+					<a th:href="@{/posts}" class="icon-link" aria-label="Posts">
+						<img th:src="@{/img/apps/posts.svg}" alt="Posts Icon">
+					</a>
+					<div class="tooltip-text">Posts: notes, dev logs, and reflections</div>
+				</div>
+
+				<div class="tooltip-container">
+					<a th:href="${cubeeLink}" target="_blank" rel="noopener noreferrer" class="icon-link"
+						aria-label="Cubee">
+						<img src="/img/apps/cubee.svg" alt="Cubee Icon">
+					</a>
+					<div class="tooltip-text">Cubee: command Cubee's movements with natural language</div>
+				</div>
+
+				<div class="tooltip-container">
+					<a th:href="${aiTunnelLink}" target="_blank" rel="noopener noreferrer" class="icon-link"
+						aria-label="AI Tunnel">
+						<img src="/img/apps/ai-tunnel.svg" alt="AI Tunnel Icon">
+					</a>
+					<div class="tooltip-text">AI Tunnel: HTML generated on the fly</div>
+				</div>
+
+				<div class="tooltip-container coming-soon">
+					<span class="icon-link" aria-label="Memory Decay">
+						<img src="/img/apps/hourglass.svg" alt="Memory Decay Icon">
+					</span>
+					<div class="tooltip-text">Memory Decay: Continual semantic memory disintegration driven by AI (coming soon)</div>
+				</div>
+
+			</div>
 		</section>
 	</main>
 	<footer>
 		<p th:inline="text">&copy; [[${year}]] michael schaefer. all rights reserved.</p>
-		<a th:href="@{/resume}" 
-			class="hover-link" 
-			aria-label="View Michael Schaefer’s resume" 
-			target="_blank"
+		<a th:href="@{/resume}" class="hover-link" aria-label="View Michael Schaefer’s resume" target="_blank"
 			rel="noopener noreferrer">
 			work with me!
 		</a>
