@@ -59,6 +59,7 @@ public class PostsController {
 		model.addAttribute("pageTitle", postDto.getPostHeadline().getTitle());
 		model.addAttribute("pageHeader", "/" + postDto.getPostHeadline().getTitle());
 		model.addAttribute("markdownContent", markdownToHtmlConverter.convertToHtml(postDto.getMarkdownText()));
+		model.addAttribute("blurb", postDto.getPostHeadline().getBlurb());
 
 		return "post-detail";
 	}
